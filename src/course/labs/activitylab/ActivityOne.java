@@ -1,7 +1,11 @@
 package course.labs.activitylab;
 
+import java.util.Currency;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.MailTo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +54,7 @@ public class ActivityOne extends Activity {
 		mTvStart = (TextView) findViewById(R.id.start);
 
 
-
+final Context cntxt = this;
 		Button launchActivityTwoButton = (Button) findViewById(R.id.bLaunchActivityTwo); 
 		launchActivityTwoButton.setOnClickListener(new OnClickListener() {
 			
@@ -65,6 +69,9 @@ public class ActivityOne extends Activity {
 				
 				// Launch the Activity using the intent
 
+	            Intent intent = new Intent(cntxt, ActivityTwo.class);
+	            startActivity(intent);
+	            finish();
 			
 			}
 		});
@@ -98,7 +105,7 @@ public class ActivityOne extends Activity {
 
 		// TODO: Emit LogCat message
 
-	Log.i("Started", "start1");
+
 	mStart++;
 		// TODO:
 		// Update the appropriate count variable
@@ -117,7 +124,7 @@ public class ActivityOne extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
-
+mResume++;
 
 	}
 
@@ -127,6 +134,7 @@ public class ActivityOne extends Activity {
 
 		// TODO: Emit LogCat message
 
+		
 	}
 
 	@Override
@@ -148,7 +156,7 @@ public class ActivityOne extends Activity {
 		// Update the appropriate count variable
 		// Update the user interface
 
-
+mRestart++;
 
 	}
 
