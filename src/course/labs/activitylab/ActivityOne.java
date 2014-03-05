@@ -1,11 +1,8 @@
 package course.labs.activitylab;
 
-import java.util.Currency;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.MailTo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +28,10 @@ public class ActivityOne extends Activity {
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called
 
-	private int mCreate, mStart, mResume,mRestart;
+	private int mCreate;
+	private int mStart;
+	private int mResume;
+	private int mRestart;
 
 	// TODO: Create variables for each of the TextViews, called
         // mTvCreate, etc. 
@@ -52,9 +52,12 @@ public class ActivityOne extends Activity {
 
 		mTvCreate = (TextView) findViewById(R.id.create);
 		mTvStart = (TextView) findViewById(R.id.start);
+		mTvResume = (TextView) findViewById(R.id.resume);
+		mTvRestart = (TextView) findViewById(R.id.restart);
 
 
-final Context cntxt = this;
+		final Context cntxt = this;
+		
 		Button launchActivityTwoButton = (Button) findViewById(R.id.bLaunchActivityTwo); 
 		launchActivityTwoButton.setOnClickListener(new OnClickListener() {
 			
@@ -71,7 +74,7 @@ final Context cntxt = this;
 
 	            Intent intent = new Intent(cntxt, ActivityTwo.class);
 	            startActivity(intent);
-	            finish();
+//	            finish();
 			
 			}
 		});
@@ -83,17 +86,22 @@ final Context cntxt = this;
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
 			
+			this.mCreate = savedInstanceState.getInt(CREATE_KEY, mCreate);
+			this.mStart = savedInstanceState.getInt(START_KEY, mStart);
+			this.mResume = savedInstanceState.getInt(RESUME_KEY, mResume);
+			this.mRestart = savedInstanceState.getInt(RESTART_KEY, mRestart);
 		
 		}
 
 		// TODO: Emit LogCat message
-
+		Log.i(TAG, "Entered the onCreate() method");
 
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface via the displayCounts() method
 
-
+		mCreate++;
+		displayCounts();
 
 	}
 
@@ -105,13 +113,14 @@ final Context cntxt = this;
 
 		// TODO: Emit LogCat message
 
-
-	mStart++;
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
 
 
+		Log.i(TAG, "Entered the onStart() method");
+		mStart++;
+		this.displayCounts();
 	}
 
 	@Override
@@ -119,13 +128,14 @@ final Context cntxt = this;
 		super.onResume();
 
 		// TODO: Emit LogCat message
-
-
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
-mResume++;
+		
+		Log.i(TAG, "Entered the onResume() method");
+		mResume++;
 
+		displayCounts();
 	}
 
 	@Override
@@ -133,7 +143,7 @@ mResume++;
 		super.onPause();
 
 		// TODO: Emit LogCat message
-
+		Log.i(TAG, "Entered the onPause() method");
 		
 	}
 
@@ -142,6 +152,7 @@ mResume++;
 		super.onStop();
 
 		// TODO: Emit LogCat message
+		Log.i(TAG, "Entered the onStop() method");
 
 	}
 
@@ -150,13 +161,13 @@ mResume++;
 		super.onRestart();
 
 		// TODO: Emit LogCat message
-
-
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
 
-mRestart++;
+		Log.i(TAG, "Entered the onRestart() method");
+		mRestart++;
+		displayCounts();
 
 	}
 
@@ -166,6 +177,7 @@ mRestart++;
 
 		// TODO: Emit LogCat message
 
+		Log.i(TAG, "Entered the onDestroy() method");
 
 	}
 
@@ -175,11 +187,10 @@ mRestart++;
 		// Save state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
 
-
-
-
-
-
+		savedInstanceState.putInt(CREATE_KEY, mCreate);
+		savedInstanceState.putInt(START_KEY, mStart);
+		savedInstanceState.putInt(RESUME_KEY, mResume);
+		savedInstanceState.putInt(RESTART_KEY, mRestart);
 	}
 	
 	// Updates the displayed counters
