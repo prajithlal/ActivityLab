@@ -3,6 +3,7 @@ package course.labs.activitylab;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +45,17 @@ public class ActivityOne extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+//		int ot = getResources().getConfiguration().orientation;
+//	    switch (ot) {
+//	    case Configuration.ORIENTATION_LANDSCAPE:
+//	        setContentView(R.layout.activity_one);
+//	        break;
+//	    case Configuration.ORIENTATION_PORTRAIT:
+//	        setContentView(R.layout.activity_one);
+//	        break;
+//	    }
+	    
 		setContentView(R.layout.activity_one);
 		
 		// TODO: Assign the appropriate TextViews to the TextView variables
